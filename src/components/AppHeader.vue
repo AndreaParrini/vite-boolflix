@@ -1,6 +1,13 @@
 <script>
+import { store } from "../store.js"
+
 export default {
     name: 'AppHeader',
+    data() {
+        return {
+            store
+        }
+    }
 }
 </script>
 
@@ -8,7 +15,7 @@ export default {
     <header>
         <div class="container">
             <h2 class="title"> Boolflix </h2>
-            <input type="text" name="searchMovie" id="searchMovie" v-model="searchText"
+            <input type="text" name="searchMovie" id="searchMovie" v-model="store.searchText"
                 placeholder="Insert here name of movie" @keyup.enter="searchAll">
         </div>
     </header>
