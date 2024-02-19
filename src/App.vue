@@ -71,8 +71,12 @@ export default {
           <img :src="urlImage(movie.original_language)" :alt="movie.original_language">
         </div>
       </li>
-      <li>
+      <!-- <li>
         <div>{{ conversionVote(movie.vote_average) }}</div>
+      </li> -->
+      <li>
+        <i class="fa-solid fa-star" style="color: #FFD43B;" v-for=" in conversionVote(movie.vote_average)"></i>
+        <i class="fa-regular fa-star" v-for=" in (5 - conversionVote(movie.vote_average))"></i>
       </li>
     </ul>
 
