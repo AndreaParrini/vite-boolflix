@@ -1,8 +1,12 @@
 <script>
 import axios from "axios";
+import AppHeader from './components/AppHeader.vue'
 
 export default {
   name: 'App',
+  components: {
+    AppHeader
+  },
   data() {
     return {
       searchText: '',
@@ -73,7 +77,8 @@ export default {
 </script>
 
 <template>
-  <input type="text" name="searchMovie" id="searchMovie" v-model="searchText">
+  <AppHeader></AppHeader>
+  <!-- <input type="text" name="searchMovie" id="searchMovie" v-model="searchText">
   <button @click="searchAll">Search</button>
   <div v-for="movie in  movies " style="border: 2px solid black;">
     <ul>
@@ -88,19 +93,12 @@ export default {
           <img :src="urlImage(movie.original_language)" :alt="nameLanguage(movie.original_language)">
         </div>
       </li>
-      <!-- <li>
-        <div>{{ conversionVote(movie.vote_average) }}</div>
-      </li> -->
       <li>
         <i class="fa-solid fa-star" style="color: #FFD43B;" v-for=" in conversionVote(movie.vote_average)"></i>
         <i class="fa-regular fa-star" v-for=" in (5 - conversionVote(movie.vote_average))"></i>
       </li>
     </ul>
-
-
-
-
-  </div>
+  </div> -->
 </template>
 
-<style></style>
+<style scoped></style>
