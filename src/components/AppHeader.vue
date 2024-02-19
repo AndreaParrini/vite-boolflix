@@ -16,7 +16,7 @@ export default {
         <div class="container">
             <h2 class="title"> Boolflix </h2>
             <input type="text" name="searchMovie" id="searchMovie" v-model="store.searchText"
-                placeholder="Insert here name of movie" @keyup.enter="searchAll">
+                placeholder="Insert here name of movie" @keyup.enter="store.searchAll">
         </div>
     </header>
 </template>
