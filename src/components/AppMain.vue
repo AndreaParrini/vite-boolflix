@@ -37,8 +37,8 @@ export default {
 <template>
     <main>
         <div class="container">
-            <div class="row">
-                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl" v-for="movie in store.movies ">
+            <div class="row" v-if="store.loader">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl" v-for=" movie  in  store.movies  ">
                     <div class="card">
                         <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt=""
                             v-if="isNull(movie.poster_path)">
@@ -57,8 +57,8 @@ export default {
                             <div class="vote">
                                 <span>Voto:</span>
                                 <i class="fa-solid fa-star" style="color: #FFD43B;"
-                                    v-for=" in conversionVote(movie.vote_average)"></i>
-                                <i class="fa-regular fa-star" v-for=" in (5 - conversionVote(movie.vote_average))"></i>
+                                    v-for=" in  conversionVote(movie.vote_average) "></i>
+                                <i class="fa-regular fa-star" v-for=" in  (5 - conversionVote(movie.vote_average)) "></i>
                             </div>
                             <div class="overview">
                                 <span>Overview:</span>
@@ -67,6 +67,11 @@ export default {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="home_page" v-else>
+                Benvenuto in Boolflix, il sito per la ricerca e la scoperta di nuovi film\serie tv da vedere.
+                Nel nostro sito potrai avere un grande varietà di scelta tra più di migliaia di film, con recensioni da
+                parte di tutti i nostri utenti, cosi da poter avere già da subito una prima senzazione.
             </div>
         </div>
     </main>
@@ -139,5 +144,13 @@ main {
     z-index: 999;
     position: relative;
     border-radius: 1rem;
+}
+
+.home_page {
+    height: 30vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
