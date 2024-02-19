@@ -6,6 +6,7 @@ export default {
   data() {
     return {
       searchText: '',
+      languages: [],
       movies: [],
       base_api_url_movies: 'https://api.themoviedb.org/3/search/movie?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT',
       base_api_url_serietv: 'https://api.themoviedb.org/3/search/tv?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT'
@@ -50,7 +51,23 @@ export default {
     conversionVote(vote) {
       const newVote = (vote * 5) / 10;
       return Math.floor(newVote);
+    },
+    nameLanguage(language) {
+      for (let i = 0; i < this.languages.length; i++) {
+        const element = this.languages[i];
+        if (element.iso_639_1 === language) {
+          return element.english_name;
+        }
+      }
     }
+  },
+  mounted() {
+    axios
+      .get('https://api.themoviedb.org/3/configuration/languages?api_key=e99307154c6dfb0b4750f6603256716d')
+      .then((response) => {
+        console.log(response.data);
+        this.languages = response.data
+      })
   }
 }
 </script>
@@ -68,7 +85,7 @@ export default {
       </li>
       <li>
         <div>
-          <img :src="urlImage(movie.original_language)" :alt="movie.original_language">
+          <img :src="urlImage(movie.original_language)" :alt="nameLanguage(movie.original_language)">
         </div>
       </li>
       <!-- <li>
