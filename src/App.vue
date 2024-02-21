@@ -2,6 +2,7 @@
 import axios from "axios";
 import AppHeader from './components/AppHeader.vue'
 import AppMain from "./components/AppMain.vue";
+import AppFooter from "./components/AppFooter.vue";
 import { store } from "./store";
 
 export default {
@@ -13,26 +14,16 @@ export default {
   },
   components: {
     AppHeader,
-    AppMain
+    AppMain,
+    AppFooter
   },
   methods: {
-    urlImage(codiceIso) {
-      const url = `/images/icons8-${codiceIso}-100.png`
-      return url;
-    },
-
     getAllLanguages() {
       axios
         .get('https://api.themoviedb.org/3/configuration/languages?api_key=e99307154c6dfb0b4750f6603256716d')
         .then((response) => {
           store.languages = response.data;
         })
-    },
-    isNull(image) {
-      if (image != null) {
-        return true
-      }
-      return false;
     }
   },
   mounted() {
@@ -44,6 +35,7 @@ export default {
 <template>
   <AppHeader></AppHeader>
   <AppMain></AppMain>
+  <AppFooter></AppFooter>
 </template>
 
 <style scoped></style>
