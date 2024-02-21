@@ -19,8 +19,8 @@ export default {
 <template>
     <main>
         <div class="container">
-            <SectionHomePage></SectionHomePage>
-            <SectionMovie></SectionMovie>
+            <SectionHomePage v-if="store.loader"></SectionHomePage>
+            <SectionMovie v-else></SectionMovie>
         </div>
     </main>
 </template>

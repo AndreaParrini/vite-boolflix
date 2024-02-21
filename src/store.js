@@ -9,6 +9,7 @@ export const store = reactive({
     movies: [],
     loader: true,
     error: false,
+    errorMessage: '',
     base_api_url_movies: 'https://api.themoviedb.org/3/search/movie?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT',
     base_api_url_serietv: 'https://api.themoviedb.org/3/search/tv?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT',
 
@@ -27,6 +28,7 @@ export const store = reactive({
                 } else {
                     this.movies = [];
                     this.error = true;
+                    this.erroreMessage();
                 }
                 this.loader = false;
             })
@@ -49,6 +51,7 @@ export const store = reactive({
                 } else {
                     this.movies = [];
                     this.error = true;
+                    this.erroreMessage();
 
                 }
                 this.loader = false
@@ -59,4 +62,12 @@ export const store = reactive({
         this.searchMovie();
         this.searchSerieTv();
     },
+    erroreMessage() {
+        if (store.searchText) {
+            this.errorMessage = 'Per la ricerca effettuata non ci sono risultati, modifica e riprova.'
+        } else {
+            this.errorMessage = 'Non hai inserito nulla, inserisci nel campo apposito e clicca enter.'
+
+        }
+    }
 })

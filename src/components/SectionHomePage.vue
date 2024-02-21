@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <section class="home_page" v-if="store.loader">
+    <section class="home_page">
         <div>
             Benvenuto in Boolflix, il sito per la ricerca e la scoperta di nuovi film\serie tv da vedere.
             Nel nostro sito potrai avere un grande varietà di scelta tra più di migliaia di film, con recensioni da

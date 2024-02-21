@@ -7,6 +7,11 @@ export default {
         return {
             store
         }
+    },
+    methods: {
+        goToHomePage() {
+            store.loader = true;
+        }
     }
 }
 </script>
@@ -14,7 +19,7 @@ export default {
 <template>
     <header>
         <div class="container">
-            <h2 class="title"> Boolflix </h2>
+            <h2 class="title" @click="goToHomePage()"> Boolflix </h2>
             <input type="text" name="searchMovie" id="searchMovie" v-model="store.searchText"
                 placeholder="Insert here name of movie" @keyup.enter="store.searchAll">
         </div>
@@ -36,6 +41,7 @@ header {
         & .title {
             color: var(--boolflix-red);
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         & input {
