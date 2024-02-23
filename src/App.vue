@@ -28,6 +28,8 @@ export default {
   },
   mounted() {
     this.getAllLanguages();
+    store.getAllGenresMovie();
+    store.getAllGenresSerieTv();
   }
 }
 </script>

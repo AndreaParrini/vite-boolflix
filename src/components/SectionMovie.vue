@@ -21,9 +21,8 @@ export default {
     </section>
     <section class="section_movies" v-else>
         <div class="row">
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl" v-for=" movie  in  store.movies  ">
-                <CardItem :movie="movie" :key="movie.id"></CardItem>
-            </div>
+            <CardItem :movie="movie" :type="'movie'" :key="movie.id" v-for=" movie  in  store.movies  "></CardItem>
+            <CardItem :movie="serieTv" :type="'serieTv'" :key="serieTv.id" v-for=" serieTv  in  store.serieTv  "></CardItem>
         </div>
     </section>
 </template>
