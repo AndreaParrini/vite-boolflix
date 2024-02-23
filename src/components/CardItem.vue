@@ -175,7 +175,8 @@ export default {
         & .language,
         & .vote,
         & .overview,
-        & .generi {
+        & .generi,
+        & .cast {
             margin: 0.5rem 0;
             font-size: 16px;
 
@@ -186,11 +187,6 @@ export default {
 
         }
 
-        & .generi div {
-            display: inline-block;
-            margin: 0.25rem;
-        }
-
         & .language {
             width: 100%;
             display: flex;
@@ -199,6 +195,15 @@ export default {
             & img {
                 max-width: 60px;
             }
+        }
+
+        & .generi div {
+            display: inline-block;
+            margin: 0.25rem;
+        }
+
+        & .cast div {
+            margin: 0.2rem 0;
         }
     }
 }
