@@ -32,6 +32,23 @@ export default {
                 store.filterMovie = store.movies;
             }
 
+        },
+        filterSerieTv() {
+            if (store.selectGenreSerieTv != "") {
+                store.filterSerieTv = [];
+                for (let i = 0; i < store.serieTv.length; i++) {
+                    const element = store.serieTv[i];
+                    for (let i = 0; i < element.genre_ids.length; i++) {
+                        const genre = element.genre_ids[i];
+                        if (genre === store.selectGenreSerieTv) {
+                            store.filterSerieTv.push(element)
+                        }
+                    }
+                }
+            } else {
+                store.filterSerieTv = store.serieTv;
+            }
+
         }
     }
 }
@@ -47,7 +64,7 @@ export default {
                 <option value="" selected>All</option>
                 <option :value="genre.id" v-for="genre in store.allGenresMovie">{{ genre.name }}</option>
             </select>
-            <select name="genreSerieTv" id="genreSerieTv" v-model="store.selectGenreSerieTv">
+            <select name="genreSerieTv" id="genreSerieTv" v-model="store.selectGenreSerieTv" @change="filterSerieTv()">
                 <option value="" selected>All</option>
 
                 <option :value="genre.id" v-for="genre in store.allGenresSerieTv">{{ genre.name }}</option>
@@ -56,7 +73,8 @@ export default {
         <div v-if="store.filterMovie.length === 0"> Non ci sono film per questo genere</div>
         <div class="row">
             <CardItem :movie="movie" :type="'movie'" :key="movie.id" v-for=" movie  in  store.filterMovie  "></CardItem>
-            <CardItem :movie="serieTv" :type="'serieTv'" :key="serieTv.id" v-for=" serieTv  in  store.serieTv  "></CardItem>
+            <CardItem :movie="serieTv" :type="'serieTv'" :key="serieTv.id" v-for=" serieTv  in  store.filterSerieTv  ">
+            </CardItem>
         </div>
     </section>
 </template>
