@@ -10,6 +10,7 @@ export default {
     data() {
         return {
             allCast: [],
+            caller: false,
             store
         }
     },
@@ -66,34 +67,49 @@ export default {
             }
         },
         getAllCast(id) {
-            if (this.type === 'movie') {
-                axios
-                    .get('https://api.themoviedb.org/3/movie/' + id + '/credits?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT')
-                    .then((response) => {
-                        this.addCast(response);
-                    })
-            } else {
-                axios
-                    .get('https://api.themoviedb.org/3/tv/' + id + '/credits?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT')
-                    .then((response) => {
-                        this.addCast(response);
-                    })
+            if (this.caller === false) {
+                if (this.type === 'movie') {
+                    axios
+                        .get('https://api.themoviedb.org/3/movie/' + id + '/credits?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT')
+                        .then((response) => {
+                            console.log(response);
+                            this.addCast(response);
+                        })
+                } else {
+                    axios
+                        .get('https://api.themoviedb.org/3/tv/' + id + '/credits?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT')
+                        .then((response) => {
+                            console.log(response);
+                            this.addCast(response);
+                        })
+                }
+                this.caller = true;
             }
-
+        },
+        textNoImage() {
+            if (this.type === 'movie') {
+                return `Per il film ${this.movie.title} non abbiamo nessun poster`
+            } else {
+                return `Per la serie TV "${this.movie.name}" non abbiamo nessun poster`
+            }
         }
 
-    },
+    }/* ,
     mounted() {
         this.getAllCast(this.movie.id);
-    }
+    } */
 }
 </script>
 
 <template>
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xxl">
-
-        <div class="card">
+        <div class="card" @mouseover="getAllCast(this.movie.id)">
             <img :src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="" v-if="isNull(movie.poster_path)">
+            <div class="noimage" v-else>
+                <i class="fa-solid fa-triangle-exclamation fa-2xl" style="color: #000000;"></i>
+                <span>{{ textNoImage() }}</span>
+                <i class="fa-solid fa-triangle-exclamation fa-2xl" style="color: #000000;"></i>
+            </div>
             <div class="info">
                 <div class="title">
                     <span>Titolo:</span> {{ movie.title ? movie.title : movie.name }}
@@ -122,8 +138,13 @@ export default {
                     </div>
                 </div>
                 <div class="cast">
-                    <span>Cast:</span>
-                    <div v-for="actor in allCast">{{ actor.name }}</div>
+                    <div v-if="allCast.length > 0">
+                        <span>Cast:</span>
+                        <div v-for="actor in allCast">{{ actor.name }}</div>
+                    </div>
+                    <div v-else>
+                        <div><span>Non abbiamo info su questo cast</span></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -154,6 +175,32 @@ export default {
     &:hover .info {
         z-index: 1000;
 
+    }
+
+    & .noimage {
+        padding: 0.5rem;
+        height: 100%;
+        width: 100%;
+        color: black;
+        background-color: white;
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: white;
+        border: 2px solid white;
+        border-radius: 1rem;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        text-transform: uppercase;
+        text-align: center;
+
+        & span {
+            color: black;
+        }
     }
 
     & .info {
