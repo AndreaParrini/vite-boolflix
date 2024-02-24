@@ -88,7 +88,7 @@ export default {
         },
         textNoImage() {
             if (this.type === 'movie') {
-                return `Per il film ${this.movie.title} non abbiamo nessun poster`
+                return `Per il film   "${this.movie.title}"   non abbiamo nessun poster`
             } else {
                 return `Per la serie TV "${this.movie.name}" non abbiamo nessun poster`
             }
