@@ -11,6 +11,7 @@ export default {
     methods: {
         goToHomePage() {
             store.loader = true;
+            store.searchText = "";
         }
     }
 }
