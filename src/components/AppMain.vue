@@ -28,7 +28,6 @@ export default {
 <style scoped>
 main {
     background-color: var(--boolflix-primary);
-    padding: 2rem 0;
     min-height: 80vh;
 }
 </style>

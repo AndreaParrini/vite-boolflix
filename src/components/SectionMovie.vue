@@ -18,10 +18,10 @@ export default {
 </script>
 
 <template>
-    <section class="error" v-if="store.error">
-        {{ store.errorMessage }}
-    </section>
-    <section class="section_movies" v-else>
+    <section class="section_movies">
+        <section class="error" v-if="store.error">
+            {{ store.errorMessage }}
+        </section>
         <SecionFilters></SecionFilters>
         <div class="row">
             <CardItem :movie="movie" :type="'movie'" :key="movie.id" v-for=" movie  in  store.filterMovie  "></CardItem>
@@ -31,4 +31,9 @@ export default {
     </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.error {
+    padding-top: 2rem;
+    color: var(--boolflix-red);
+}
+</style>
