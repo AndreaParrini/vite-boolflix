@@ -18,24 +18,11 @@ export default {
                     for (let i = 0; i < response.data.results.length; i++) {
                         const movie = response.data.results[i];
                         if (loader < 6) {
-                            //this.trendMovie.push('https://image.tmdb.org/t/p/w500' + movie.poster_path);
                             this.trendMovie.push(movie);
                             loader++;
                         }
                     }
                 });
-        },
-        prev() {
-            this.activeImage--;
-            if (this.activeImage < 0) {
-                this.activeImage = this.trendMovie.length - 1;
-            }
-        },
-        next() {
-            this.activeImage++;
-            if (this.activeImage > this.trendMovie.length - 1) {
-                this.activeImage = 0;
-            }
         }
     },
     created() {
