@@ -52,7 +52,7 @@ export default {
 <template>
     <section class="section_filters">
         <div class="movies">
-            <div>Filtra per genere i film cercati</div>
+            <div>Filtra i film per genere </div>
             <select name="genreMovie" id="genreMovie" v-model="store.selectGenreMovie" @change="filterMovies()">
                 <option value="" selected>All</option>
                 <option :value="genre.id" v-for="genre in store.allGenresMovie">{{ genre.name }}</option>
@@ -60,7 +60,7 @@ export default {
             <div v-if="store.filterMovie.length === 0"> Non ci sono film per questo genere</div>
         </div>
         <div class="serietv">
-            <div>Filtra per genere le Serie Tv cercate</div>
+            <div>Filtra le Serie Tv per genere </div>
             <select name="genreSerieTv" id="genreSerieTv" v-model="store.selectGenreSerieTv" @change="filterSerieTv()">
                 <option value="" selected>All</option>
                 <option :value="genre.id" v-for="genre in store.allGenresSerieTv">{{ genre.name }}</option>
