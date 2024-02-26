@@ -40,6 +40,10 @@ img {
   padding: 0.5rem;
 }
 
+.col-2 {
+  width: calc((100% / 12) * 2);
+}
+
 .col-12 {
   width: 100%;
 }
