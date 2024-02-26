@@ -19,8 +19,6 @@ export const store = reactive({
     selectGenreSerieTv: '',
     base_api_url_movies: 'https://api.themoviedb.org/3/search/movie?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT',
     base_api_url_serietv: 'https://api.themoviedb.org/3/search/tv?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT',
-    //base_api_url_cast_serietv: `https//api.themoviedb.org/3/tv/${id}/credits?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT`,
-    base_api_url_cast_movie: `https//api.themoviedb.org/3/movie/`,
 
 
     // ACTIONS
@@ -30,18 +28,20 @@ export const store = reactive({
         axios
             .get(url)
             .then((response) => {
-                /* console.log(response);
-                console.log(response.data.results); */
                 if (response.data.results.length != 0) {
                     this.movies = response.data.results;
                     this.filterMovie = this.movies;
                     this.error = false;
                 } else {
                     this.movies = [];
+                    this.filterMovie = [];
                     this.error = true;
-                    this.erroreMessage();
+                    this.erroreMessage('Film');
                 }
                 this.loader = false;
+            })
+            .catch((error) => {
+                console.error(error);
             })
     },
     searchSerieTv() {
@@ -50,28 +50,29 @@ export const store = reactive({
         axios
             .get(url)
             .then((response) => {
-                /* console.log(response);
-                console.log(response.data.results); */
                 if (response.data.results.length != 0) {
                     this.serieTv = response.data.results;
                     this.filterSerieTv = this.serieTv;
                     this.error = false;
                 } else {
-                    this.movies = [];
+                    this.serieTv = [];
+                    this.filterSerieTv = [];
                     this.error = true;
-                    this.erroreMessage();
+                    this.erroreMessage('Serie TV');
                 }
                 this.loader = false
-
+            })
+            .catch((error) => {
+                console.error(error);
             })
     },
     searchAll() {
         this.searchMovie();
         this.searchSerieTv();
     },
-    erroreMessage() {
+    erroreMessage(type) {
         if (store.searchText) {
-            this.errorMessage = 'Per la ricerca effettuata non ci sono risultati, modifica e riprova.'
+            this.errorMessage = `Per la ricerca effettuata non ci sono ${type}, modifica e riprova.`
         } else {
             this.errorMessage = 'Non hai inserito nulla, inserisci nel campo apposito e clicca enter.'
 
@@ -82,6 +83,9 @@ export const store = reactive({
             .get('https://api.themoviedb.org/3/genre/movie/list?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT')
             .then((response) => {
                 this.allGenresMovie = response.data.genres;
+            })
+            .catch((error) => {
+                console.error(error);
             });
     },
     getAllGenresSerieTv() {
@@ -89,6 +93,9 @@ export const store = reactive({
             .get('https://api.themoviedb.org/3/genre/tv/list?api_key=1624b90122a6e598e03c4e5d2ad8bd21&language=it-IT')
             .then((response) => {
                 this.allGenresSerieTv = response.data.genres;
+            })
+            .catch((error) => {
+                console.error(error);
             });
     }
 })

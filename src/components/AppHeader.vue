@@ -12,6 +12,10 @@ export default {
         goToHomePage() {
             store.loader = true;
             store.searchText = "";
+            store.filterMovie = [];
+            store.filterSerieTv = [];
+            store.movies = [];
+            store.serieTv = [];
         }
     }
 }

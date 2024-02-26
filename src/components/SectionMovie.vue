@@ -22,7 +22,7 @@ export default {
         <section class="error" v-if="store.error">
             {{ store.errorMessage }}
         </section>
-        <SecionFilters></SecionFilters>
+        <SecionFilters v-if="store.movies.length > 0 || store.serieTv.length > 0"></SecionFilters>
         <div class="row">
             <CardItem :movie="movie" :type="'movie'" :key="movie.id" v-for=" movie  in  store.filterMovie  "></CardItem>
             <CardItem :movie="serieTv" :type="'serieTv'" :key="serieTv.id" v-for=" serieTv  in  store.filterSerieTv  ">

@@ -11,8 +11,8 @@ export default {
     methods: {
         filterMovies() {
             if (store.selectGenreMovie != "") {
+                store.error = false;
                 store.filterMovie = [];
-                console.log('filtro');
                 for (let i = 0; i < store.movies.length; i++) {
                     const element = store.movies[i];
                     for (let i = 0; i < element.genre_ids.length; i++) {
@@ -22,8 +22,12 @@ export default {
                         }
                     }
                 }
+                if (store.filterMovie.length === 0) {
+                    store.error = true;
+                    store.erroreMessage('Film');
+                }
             } else {
-                console.log('uguale');
+                store.error = false;
                 store.filterMovie = store.movies;
             }
 
@@ -40,7 +44,12 @@ export default {
                         }
                     }
                 }
+                if (store.filterSerieTv.length === 0) {
+                    store.error = true;
+                    store.erroreMessage('Serie Tv');
+                }
             } else {
+                store.error = false;
                 store.filterSerieTv = store.serieTv;
             }
 
@@ -57,7 +66,6 @@ export default {
                 <option value="" selected>All</option>
                 <option :value="genre.id" v-for="genre in store.allGenresMovie">{{ genre.name }}</option>
             </select>
-            <div v-if="store.filterMovie.length === 0"> Non ci sono film per questo genere</div>
         </div>
         <div class="serietv">
             <div>Filtra le Serie Tv per genere </div>
@@ -65,7 +73,6 @@ export default {
                 <option value="" selected>All</option>
                 <option :value="genre.id" v-for="genre in store.allGenresSerieTv">{{ genre.name }}</option>
             </select>
-            <div v-if="store.filterSerieTv.length === 0"> Non ci sono SerieTv per questo genere</div>
         </div>
 
     </section>
