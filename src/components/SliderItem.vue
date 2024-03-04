@@ -81,7 +81,7 @@ export default {
         &.active {
             &>img {
                 filter: drop-shadow(0 1rem 0.6rem black);
-                border: 3px solid black;
+                border: 3px solid white;
                 scale: 1.1;
             }
 
